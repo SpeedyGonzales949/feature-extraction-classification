@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExtractorPredictor &mdash; Manufacturing Part Classification 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SCRIPTS" href="scripts.html" />
+    <link rel="prev" title="Model Builder" href="build.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Manufacturing Part Classification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Manufacturing-Part-Classification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="launch.html">LAUNCH</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="model.html">MODEL</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="evaluator.html">Evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html">Models Zoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html">Model Builder</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ExtractorPredictor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#model.extractor_predictor.feature_extractor.FeatureExtractor"><code class="docutils literal notranslate"><span class="pre">FeatureExtractor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor"><code class="docutils literal notranslate"><span class="pre">SIFTFeatureExtractor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor"><code class="docutils literal notranslate"><span class="pre">VGG16FeatureExtractor</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html">SCRIPTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataloader.html">DATALOADER</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Manufacturing Part Classification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Manufacturing-Part-Classification</a></li>
+          <li class="breadcrumb-item"><a href="model.html">MODEL</a></li>
+      <li class="breadcrumb-item active">ExtractorPredictor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/extractor_predictor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-model.extractor_predictor.feature_extractor">
+<span id="extractorpredictor"></span><h1>ExtractorPredictor<a class="headerlink" href="#module-model.extractor_predictor.feature_extractor" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.FeatureExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.extractor_predictor.feature_extractor.</span></span><span class="sig-name descname"><span class="pre">FeatureExtractor</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.FeatureExtractor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents a feature extractor for image data. It provides an interface for fitting the model to the data and extracting features from the data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.FeatureExtractor.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.FeatureExtractor.fit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.FeatureExtractor.load_model">
+<span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.FeatureExtractor.load_model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.FeatureExtractor.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.FeatureExtractor.predict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.FeatureExtractor.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.FeatureExtractor.serialize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.extractor_predictor.feature_extractor.</span></span><span class="sig-name descname"><span class="pre">SIFTFeatureExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SIFT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_visual_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.extractor_predictor.feature_extractor.FeatureExtractor" title="model.extractor_predictor.feature_extractor.FeatureExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureExtractor</span></code></a></p>
+<p>SIFTFeatureExtractor is a class that extracts SIFT features from images and computes visual words.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.visual_words">
+<span class="sig-name descname"><span class="pre">visual_words</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.visual_words" title="Link to this definition"></a></dt>
+<dd><p>The computed visual words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.n_visual_words">
+<span class="sig-name descname"><span class="pre">n_visual_words</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.n_visual_words" title="Link to this definition"></a></dt>
+<dd><p>The number of visual words to compute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.detector" title="Link to this definition"></a></dt>
+<dd><p>The SIFT detector object. Defaults to SIFT. Other options are RootSIFT and PCASIFT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SIFT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If the specified detector_name is not implemented.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.compute_visual_words">
+<span class="sig-name descname"><span class="pre">compute_visual_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">descriptors</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.compute_visual_words" title="Link to this definition"></a></dt>
+<dd><p>Computes the visual words using K-means clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>descriptors</strong> (<em>ndarray</em>) – The descriptors of the images.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed visual words.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.fit" title="Link to this definition"></a></dt>
+<dd><p>Fits the SIFTFeatureExtractor by computing the visual words from the given images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<em>List</em><em>[</em><em>ndarray</em><em>]</em>) – The list of images to fit the extractor on.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.load_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.load_model" title="Link to this definition"></a></dt>
+<dd><p>Loads a serialized SIFTFeatureExtractor object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – A dictionary containing the serialized representation of the object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The loaded SIFTFeatureExtractor object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor" title="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor">SIFTFeatureExtractor</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts the features of the given images using the computed visual words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<em>List</em><em>[</em><em>ndarray</em><em>]</em>) – The list of images to predict the features for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted features for each image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[ndarray]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the model has not been fitted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.serialize" title="Link to this definition"></a></dt>
+<dd><p>Serializes the SIFTFeatureExtractor object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the serialized representation of the object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.SIFTFeatureExtractor.transform" title="Link to this definition"></a></dt>
+<dd><p>Transforms the images into descriptors using the type of SIFT detector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<em>List</em><em>[</em><em>ndarray</em><em>]</em>) – The list of images to transform.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The descriptors of the images.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model.extractor_predictor.feature_extractor.</span></span><span class="sig-name descname"><span class="pre">VGG16FeatureExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(224,</span> <span class="pre">224,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'imagenet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.extractor_predictor.feature_extractor.FeatureExtractor" title="model.extractor_predictor.feature_extractor.FeatureExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureExtractor</span></code></a></p>
+<p>A class representing a feature extractor based on the VGG16 model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.model" title="Link to this definition"></a></dt>
+<dd><p>The VGG16 model used for feature extraction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.input_shape">
+<span class="sig-name descname"><span class="pre">input_shape</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.input_shape" title="Link to this definition"></a></dt>
+<dd><p>The input shape of the images to be processed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.weights">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.weights" title="Link to this definition"></a></dt>
+<dd><p>The weights used by the model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.pooling">
+<span class="sig-name descname"><span class="pre">pooling</span></span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.pooling" title="Link to this definition"></a></dt>
+<dd><p>The pooling strategy used by the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.fit" title="Link to this definition"></a></dt>
+<dd><p>Fits the feature extractor to the given images.
+Since we are only using the imagenet weights for feature extraction, this method does not do anything.
+However, it is included for compatibility with the ExtractorPredictor class.
+In future, we can add code here to fine-tune the model on the given images.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.load_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.load_model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts the features of the given images using the fitted model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<em>numpy.ndarray</em>) – An array of images to extract features from.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of extracted features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the model has not been fitted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.extractor_predictor.feature_extractor.VGG16FeatureExtractor.serialize" title="Link to this definition"></a></dt>
+<dd><p>Serializes the feature extractor model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A dictionary containing the serialized information of the feature extractor.</dt><dd><ul class="simple">
+<li><p>”weights”: The weights used by the model (e.g., “imagenet”).</p></li>
+<li><p>”input_shape”: The shape of the model’s input.</p></li>
+<li><p>”pooling”: The pooling method used by the model (e.g., “max”).</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="build.html" class="btn btn-neutral float-left" title="Model Builder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scripts.html" class="btn btn-neutral float-right" title="SCRIPTS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mihnea Aleman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

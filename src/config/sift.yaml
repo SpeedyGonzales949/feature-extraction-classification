@@ -1,0 +1,67 @@
+num_classes: 3
+save_dir: ./logs/sift
+
+train_dataloader:
+  batch_size: 32
+  shuffle: True
+  dataset:
+    data_dir: ./data/Train
+    transform:
+      GrayScale: {}
+      
+validation_dataloader:
+  batch_size: 1
+  shuffle: True
+  dataset:
+    data_dir: ./data/Test
+    transform: 
+      GrayScale: {}
+
+test_dataloader:
+  batch_size: 1
+  shuffle: True
+  dataset:
+    data_dir: ./data/Test
+    transform:
+      RandomFlip: {}
+      RandomRotation: {} 
+      GrayScale: {}
+
+
+model:
+  type: extract_and_predict
+  params:
+    class_encoder: "label_encoder"
+    classes: ["A", "B", "C"]
+  feature_extractor:
+    type: SIFTFeatureExtractor
+    params:
+      detector_name: SIFT
+      n_visual_words: 100
+  feature_predictor:
+    type: RandomForestPredictor 
+    params: {}
+
+
+evaluator:
+  metrics:
+  - name: Accuracy
+    params:
+      reduce: macro
+  - name: Precision
+    params:
+      reduce: macro
+  - name: Recall
+    params:
+      reduce: macro
+  - name: F1Score
+    params:
+      reduce: macro
+  - name: Recall
+    params: {}
+  - name: F1Score
+    params: {}
+  - name : Accuracy
+    params: {}
+  - name: Precision
+    params: {}

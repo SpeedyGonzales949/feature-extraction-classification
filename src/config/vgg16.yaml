@@ -1,0 +1,74 @@
+num_classes: 3 # Specifies the number of classes in the dataset.
+save_dir: ./logs/vgg16 # Specifies the directory where the model checkpoints and logs will be saved.
+
+train_dataloader:
+  batch_size: 32 # Specifies the batch size for the training dataloader.
+  shuffle: True # Specifies whether the training dataloader should shuffle the dataset.
+  dataset:
+    data_dir: ./data/Train # Specifies the directory where the training data is stored.
+    transform: # Specifies the transformations to be applied to the training data.
+      Resize: 
+        size: [224, 224]
+      Normalize: 
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+
+validation_dataloader:
+  batch_size: 1
+  shuffle: False
+  dataset:
+    data_dir: ./data/Test
+    transform: 
+      Resize: 
+        size: [224, 224]
+      Normalize: 
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+
+test_dataloader:
+  batch_size: 1
+  shuffle: True
+  dataset:
+    data_dir: ./data/Test
+    transform: 
+      Resize: 
+        size: [224, 224]
+      Normalize: 
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+
+model:
+  type: extract_and_predict # Specifies the type of model to be used.
+  params: # Specifies the parameters for the model.
+    class_encoder: "label_encoder"
+    classes: ["A", "B", "C"]
+  feature_extractor:
+    type: VGG16FeatureExtractor
+    params:
+      input_shape: [224, 224, 3]
+  feature_predictor:
+    type: RandomForestPredictor 
+    params: {}
+
+evaluator:
+  metrics: # Specifies the metrics to be used for evaluation.
+  - name: Accuracy
+    params:
+      reduce: macro
+  - name: Precision
+    params:
+      reduce: macro
+  - name: Recall
+    params:
+      reduce: macro
+  - name: F1Score
+    params:
+      reduce: macro
+  - name: Recall
+    params: {}
+  - name: F1Score
+    params: {}
+  - name : Accuracy
+    params: {}
+  - name: Precision
+    params: {}

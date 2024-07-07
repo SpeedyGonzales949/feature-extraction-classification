@@ -93,10 +93,10 @@ python ./launch.py --config <config_file> --visualization-only --weights <weight
 If you find Manufacturing-Part-CLassification useful, please cite my work as an acknowledgment.
 
 ```bibtex
-@misc{manufacturing-part-classification2024,
-    title={Manufacturing Part Classification},
+@misc{feature-extraction-classification2024,
+    title={Feature Extraction and Classification},
     author={Aleman Mihnea},
-    howpublished={\url{https://github.com/SpeedyGonzales949/Manufacturing-Part-Classification}},
+    howpublished={\url{https://github.com/SpeedyGonzales949/feature-extraction-classification}},
     year={2024}
 }
 ```
